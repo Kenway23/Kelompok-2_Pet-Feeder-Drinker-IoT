@@ -10,6 +10,8 @@ Project ini belum menentukan komponen hardware, platform aplikasi, maupun teknol
 1.Rifki Muhamad Fauzi - 23552011078<br>
 2.Nisa Silva Triana - 23552011094
 
+---
+
 ## Status Project
 
 Planning / Perencanaan Konsep
