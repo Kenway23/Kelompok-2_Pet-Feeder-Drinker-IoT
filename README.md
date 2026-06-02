@@ -6,7 +6,7 @@ Project ini belum menentukan komponen hardware, platform aplikasi, maupun teknol
 
 ---
 
-##List Anggota Kelompok 2
+## List Anggota Kelompok 2
 1.Rifki Muhamad Fauzi - 23552011078
 
 ## Status Project
