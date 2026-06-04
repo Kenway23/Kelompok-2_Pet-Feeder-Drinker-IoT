@@ -43,11 +43,9 @@ Project ini dirancang sebagai solusi awal untuk membuat alat yang dapat membantu
 
 Tujuan dari project ini adalah:
 
-1. Merancang konsep sistem pemberi makan dan minum hewan peliharaan otomatis.
+1. Merancang sistem pemberi makan dan minum hewan peliharaan otomatis.
 2. Membantu pemilik hewan agar lebih mudah mengatur jadwal pemberian makan dan minum.
 3. Mengurangi risiko hewan terlambat mendapatkan makanan atau minuman.
-4. Membuat dasar perencanaan sebelum menentukan hardware dan software yang akan digunakan.
-5. Menjadi pondasi untuk pengembangan project IoT yang lebih lengkap di tahap berikutnya.
 
 ---
 
