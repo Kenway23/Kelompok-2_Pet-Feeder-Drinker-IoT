@@ -7,8 +7,9 @@ Project ini belum menentukan komponen hardware, platform aplikasi, maupun teknol
 ---
 
 ## List Anggota Kelompok 2
-1.Rifki Muhamad Fauzi - 23552011078<br>
-2.Nisa Silva Triana - 23552011094
+1. Rifki Muhamad Fauzi - 23552011078
+2. Nisa Silva Triana - 23552011094
+3. Adrianto - 23552011381
 
 ---
 
