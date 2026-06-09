@@ -1,7 +1,5 @@
 # IoT Pet Feeder & Drinker
 
-![Rangkaian Sistem Mikrokontrollernya](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/72439cdd1e9d1118411b11d8c3b9dc2a1eaf8d77/assets/Rangkaian%20Sistem%20Mikrokontroller%20iterasi%201.jpeg)
-
 Project ini adalah perencanaan awal untuk membuat sistem pemberi makan dan minum hewan peliharaan secara otomatis berbasis IoT. Pada tahap ini, project masih berfokus pada konsep, tujuan, latar belakang, dan arah pengembangan sistem.
 
 Project ini belum menentukan komponen hardware, platform aplikasi, maupun teknologi backend yang akan digunakan. Dokumentasi ini dibuat sebagai dasar awal sebelum masuk ke tahap desain teknis dan implementasi.
@@ -20,6 +18,10 @@ Project ini belum menentukan komponen hardware, platform aplikasi, maupun teknol
 Planning / Perencanaan Konsep
 
 ---
+
+## Gambar Simulasi Project
+## V1
+![Rangkaian Sistem Mikrokontrollernya](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/72439cdd1e9d1118411b11d8c3b9dc2a1eaf8d77/assets/Rangkaian%20Sistem%20Mikrokontroller%20iterasi%201.jpeg)
 
 ## Deskripsi Project
 
