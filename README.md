@@ -23,6 +23,9 @@ Planning / Perencanaan Konsep
 ## V1
 ![Rangkaian Sistem Mikrokontrollernya](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/72439cdd1e9d1118411b11d8c3b9dc2a1eaf8d77/assets/Rangkaian%20Sistem%20Mikrokontroller%20iterasi%201.jpeg)
 
+## V2
+![Rangkaian Sistem V2](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/Feeder%20v2.png)
+
 ## Deskripsi Project
 
 IoT Pet Feeder & Drinker adalah ide project yang bertujuan untuk membantu pemilik hewan peliharaan dalam memberikan makanan dan minuman secara lebih teratur, praktis, dan efisien.
