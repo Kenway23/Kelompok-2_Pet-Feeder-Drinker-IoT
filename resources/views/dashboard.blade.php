@@ -74,59 +74,35 @@
                 
                 <div class="space-y-6">
                     <section class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm text-center">
-                        <h2 class="text-sm font-bold text-gray-800 mb-3 text-left">Kontrol Manual</h2>
-                        <div class="bg-gray-50 border border-gray-100 p-4 rounded-xl space-y-3">
-                            <span class="text-4xl block">🥣</span>
-                            <p class="text-xs text-gray-500">Buka katup penampung pakan secara instan sekarang.</p>
-                            <form action="{{ route('feed.now') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold text-sm py-2 rounded-xl transition cursor-pointer shadow-sm">Keluarkan Pakan</button>
-                            </form>
-                        </div>
-                    </section>
+    <h2 class="text-sm font-bold text-gray-800 mb-3 text-left">Kontrol Manual</h2>
+    <div class="bg-gray-50 border border-gray-100 p-4 rounded-xl space-y-3">
+        <span class="text-4xl block">🥣</span>
+        <p class="text-xs text-gray-500">Buka katup penampung pakan secara instan sekarang.</p>
+        
+        <form action="{{ route('feed.now') }}" method="POST" class="space-y-4">
+            @csrf
+            
+            <div class="flex items-center justify-center space-x-2">
+                <div class="relative max-w-[100px]">
+                    <input 
+                        type="number" 
+                        name="porsi_manual" 
+                        min="10" 
+                        value="20" 
+                        class="w-full text-center pl-2 pr-2 py-2 bg-white border border-gray-200 rounded-xl text-sm font-bold text-gray-700 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                        required
+                    >
+                </div>
+                <span class="text-sm font-semibold text-gray-500 select-none">gram</span>
+            </div>
+            
+            <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold text-sm py-2.5 rounded-xl transition cursor-pointer shadow-sm">
+                Keluarkan Pakan
+            </button>
+        </form>
+    </div>
+</section>
 
-                    <section class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
-                        <h2 class="text-sm font-bold text-gray-800 mb-1">Tambah Jadwal</h2>
-                        <p class="text-xs text-gray-400 mb-4">Atur siklus rotasi dinamo pakan otomatis.</p>
-                        
-                        <form action="{{ route('schedule.store') }}" method="POST" class="space-y-4">
-                            @csrf
-                            <div>
-                                <label class="block text-xs font-semibold text-gray-500 mb-1.5">Jam Pemberian</label>
-                                <div class="relative flex items-center">
-                                    <input 
-                                        type="text" 
-                                        name="waktu_makan" 
-                                        placeholder="Pilih Jam"
-                                        class="timepicker w-full pl-4 pr-12 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-medium text-gray-700 outline-none transition focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 cursor-pointer" 
-                                        required
-                                    >
-                                    <span class="absolute right-4 text-gray-400 pointer-events-none select-none">⏰</span>
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <label class="block text-xs font-semibold text-gray-500 mb-1.5">Jumlah yang dikeluarkan</label>
-                                <div class="relative flex items-center">
-                                    <input 
-                                        type="number" 
-                                        min="10" 
-                                        name="porsi" 
-                                        placeholder="60" 
-                                        class="w-full pl-4 pr-16 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-medium text-gray-700 outline-none transition focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100" 
-                                        required
-                                    >
-                                    <span class="absolute right-4 text-sm font-medium text-gray-400 pointer-events-none select-none">gram</span>
-                                </div>
-                                <p class="text-[11px] text-gray-400 mt-1">Berapa gram pakan yang dikeluarkan?</p>
-                            </div>
-
-                            <div class="flex space-x-2 pt-2">
-                                <button type="reset" class="flex-1 border border-gray-200 text-gray-500 text-sm py-2 rounded-xl hover:bg-gray-50 cursor-pointer">Batal</button>
-                                <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2 rounded-xl shadow-sm cursor-pointer">Simpan</button>
-                            </div>
-                        </form>
-                    </section>
                 </div>
 
                 <div class="lg:col-span-2 bg-white border border-gray-100 rounded-2xl p-5 shadow-sm overflow-hidden">
@@ -143,24 +119,32 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-50 font-medium text-gray-700">
-                                @forelse($schedules as $index => $sch)
-                                <tr>
-                                    <td class="py-3.5 text-gray-400">{{ $index + 1 }}.</td>
-                                    <td class="py-3.5 font-bold text-gray-900">⏰ {{ \Carbon\Carbon::parse($sch->waktu_makan)->format('H:i') }} WIB</td>
-                                    <td class="py-3.5"><span class="bg-amber-50 text-amber-700 text-xs px-2.5 py-1 rounded-md">🍖 {{ $sch->porsi }} gram</span></td>
-                                    <td class="py-3.5 text-center"><span class="text-[11px] bg-green-50 text-green-700 px-2 py-0.5 rounded-full border border-green-100">Aktif</span></td>
-                                    <td class="py-3.5 text-right">
-                                        <form action="{{ route('schedule.destroy', $sch->id) }}" method="POST" onsubmit="return confirm('Hapus jadwal?')">
-                                            @csrf @method('DELETE')
-                                            <button type="submit" class="text-gray-400 hover:text-red-500 p-1 rounded-lg hover:bg-red-50 cursor-pointer">🗑️</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @empty
-                                <tr>
-                                    <td colspan="5" class="py-8 text-center text-gray-400 font-normal">Belum ada pengaturan jadwal makan otomatis.</td>
-                                </tr>
-                                @endforelse
+                            @forelse($schedules as $index => $sch)
+                            <tr class="{{ !$sch->is_active ? 'opacity-60 bg-gray-50/50' : '' }}">
+                            <td class="py-3.5 text-gray-400">{{ $index + 1 }}.</td>
+                            <td class="py-3.5 font-bold text-gray-900">⏰ {{ \Carbon\Carbon::parse($sch->waktu_makan)->format('H:i') }} WIB</td>
+                            <td class="py-3.5"><span class="bg-amber-50 text-amber-700 text-xs px-2.5 py-1 rounded-md">🍖 {{ $sch->porsi }} gram</span></td>
+        
+                            <td class="py-3.5 text-center">
+                            @if($sch->is_active)
+                                <span class="text-[11px] bg-green-50 text-green-700 px-2.5 py-0.5 rounded-full border border-green-100 font-semibold">Aktif</span>
+                            @else
+                                <span class="text-[11px] bg-gray-100 text-gray-500 px-2.5 py-0.5 rounded-full border border-gray-200 font-semibold">Nonaktif</span>
+                            @endif
+                            </td>
+        
+                            <td class="py-3.5 text-right">
+                            <form action="{{ route('schedule.destroy', $sch->id) }}" method="POST" onsubmit="return confirm('Hapus jadwal?')">
+                            @csrf @method('DELETE')
+                            <button type="submit" class="text-gray-400 hover:text-red-500 p-1 rounded-lg hover:bg-red-50 cursor-pointer">🗑️</button>
+                            </form>
+                            </td>
+                            </tr>
+                            @empty
+                            <tr>
+                            <td colspan="5" class="py-8 text-center text-gray-400 font-normal">Belum ada pengaturan jadwal makan otomatis.</td>
+                            </tr>
+                            @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -180,13 +164,13 @@
     </div>
 
     <script>
-        // Logika Live Clock Server
+       
         setInterval(() => {
             const now = new Date();
             document.getElementById('live-clock').innerText = now.toTimeString().split(' ')[0];
         }, 1000);
 
-        // Inisialisasi Flatpickr Jam Otomatis di Dashboard
+        
         flatpickr(".timepicker", {
             enableTime: true,
             noCalendar: true,

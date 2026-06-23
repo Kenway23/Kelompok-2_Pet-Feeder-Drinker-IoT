@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\FeedingSchedule;
 use PhpMqtt\Client\MqttClient;
+use PhpMqtt\Client\ConnectionSettings;
 
 class FeederController extends Controller
 {
@@ -15,18 +16,18 @@ class FeederController extends Controller
         return view('dashboard', compact('schedules'));
     }
 
-    // [REVISI] 2. Tampilkan Halaman Manajemen Jadwal Pakan
+    // 2. Tampilkan Halaman Manajemen Jadwal Pakan
     public function jadwalIndex()
     {
         $schedules = FeedingSchedule::orderBy('waktu_makan', 'asc')->get();
         
-        // Menghitung jumlah baris jadwal yang ada untuk kartu informasi di UI
+        
         $totalPakanHariIni = $schedules->count();
         
         return view('jadwal', compact('schedules', 'totalPakanHariIni'));
     }
 
-    // [REVISI] 3. Simpan Jadwal Baru & Publish ke MQTT
+    // 3. Simpan Jadwal Baru & Publish ke MQTT
     public function store(Request $request)
     {
         $request->validate([
@@ -34,42 +35,45 @@ class FeederController extends Controller
             'porsi' => 'required|numeric|min:10',
         ]);
 
-        // Menyimpan ke Database (Membaca checkbox status jika ada, jika tidak otomatis true)
+        
         FeedingSchedule::create([
             'waktu_makan' => $request->waktu_makan,
             'porsi' => $request->porsi,
             'is_active' => $request->has('status') ? $request->status : true
         ]);
 
-        // Kirim Sinyal via MQTT Protokol
+        
         $this->publishToMqtt('add_schedule', $request->waktu_makan, $request->porsi);
 
         return redirect()->back()->with('success', 'Jadwal pakan berhasil disimpan dan disinkronkan ke alat!');
     }
 
-    // [BARU] 4. Saklar Ubah Status Aktif/Nonaktif (Toggle Status)
+    // 4. Saklar Ubah Status Aktif/Nonaktif 
     public function toggleStatus($id)
     {
         $schedule = FeedingSchedule::findOrFail($id);
         
-        // Membalikkan status (jika true jadi false, jika false jadi true)
         $schedule->is_active = !$schedule->is_active;
         $schedule->save();
 
-        // Tentukan aksi payload MQTT berdasarkan status terbaru
         $action = $schedule->is_active ? 'activate_schedule' : 'deactivate_schedule';
         $this->publishToMqtt($action, $schedule->waktu_makan, $schedule->porsi);
 
         return redirect()->back()->with('success', 'Status keaktifan jadwal berhasil diperbarui!');
     }
 
-    // 5. Tombol Trigger Manual "Keluarkan Pakan Sekarang"
-    public function feedNow()
+    // 5. Tombol Trigger Manual "Keluarkan Pakan Sekarang" 
+    public function feedNow(Request $request)
     {
-        // Kirim perintah instan porsi standar ke alat tanpa simpan jadwal
-        $this->publishToMqtt('feed_now', now()->format('H:i'), 50);
+        $request->validate([
+            'porsi_manual' => 'required|numeric|min:10',
+        ]);
 
-        return redirect()->back()->with('success', 'Perintah instan berhasil dikirim! Motor pakan berputar.');
+        $porsi = $request->input('porsi_manual');
+
+        $this->publishToMqtt('feed_now', now()->format('H:i'), $porsi);
+
+        return redirect()->back()->with('success', 'Perintah instan berhasil dikirim! Mengeluarkan pakan sebanyak ' . $porsi . ' gram.');
     }
 
     // 6. Hapus Jadwal
@@ -77,7 +81,6 @@ class FeederController extends Controller
     {
         $schedule = FeedingSchedule::findOrFail($id);
         
-        // Beritahu alat bahwa jadwal dengan waktu tersebut dihapus
         $this->publishToMqtt('delete_schedule', $schedule->waktu_makan, $schedule->porsi);
         
         $schedule->delete();
@@ -85,15 +88,18 @@ class FeederController extends Controller
         return redirect()->back()->with('success', 'Jadwal berhasil dihapus dari sistem!');
     }
 
-    // Fungsi Pembantu (Helper) untuk Koneksi MQTT
     private function publishToMqtt($action, $waktu, $porsi)
     {
         try {
-            $server = env('MQTT_HOST', 'broker.hivemq.com');
+            $server = env('MQTT_HOST', 'iot-cat-feeder.cloud.shiftr.io');
             $port = env('MQTT_PORT', 1883);
+
+            $connectionSettings = (new ConnectionSettings)
+                ->setUsername(env('MQTT_USERNAME'))
+                ->setPassword(env('MQTT_PASSWORD'));
             
             $mqtt = new MqttClient($server, $port, 'laravel_pet_feeder_' . uniqid());
-            $mqtt->connect();
+            $mqtt->connect($connectionSettings);
 
             $payload = json_encode([
                 'action' => $action,
@@ -101,11 +107,9 @@ class FeederController extends Controller
                 'porsi'  => (int)$porsi
             ]);
 
-            // Publish ke topic khusus pakan hewan
             $mqtt->publish('pet-feeder/pakan/jadwal', $payload, 0);
             $mqtt->disconnect();
         } catch (\Exception $e) {
-            // Log error jika broker offline agar web tidak crash saat simulasi koding lokal
             logger('MQTT Error: ' . $e->getMessage());
         }
     }
