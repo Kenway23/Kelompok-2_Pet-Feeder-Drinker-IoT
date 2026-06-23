@@ -18,11 +18,11 @@ Project ini dalam pengembangan. Komponen hardware, serta kebutuhan-kebutuhan unt
 
 Dalam Pengembangan
 
---
+---
 
 ## Link Penting
 
-Kode ESP32: [Link ke branch ESP32](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/tree/esp32)
+Kode ESP32: [Link ke branch ESP32](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/tree/esp32) \n
 Wokwi : [Link ke prototype Wokwi](https://wokwi.com/projects/465871190871984129)
 
 ---
