@@ -37,7 +37,7 @@ bool wifi_connected = false;
 // mqtt
 const char* mqtt_addr = "iot-cat-feeder.cloud.shiftr.io";
 const char* mqtt_username = "iot-cat-feeder";
-const char* mqtt_password = "iCeCdkvG81Vf1nrs";
+const char* mqtt_password = "insert yout password here";
 const short mqtt_port = 443;
 
 MQTTClient mqtt_client;
