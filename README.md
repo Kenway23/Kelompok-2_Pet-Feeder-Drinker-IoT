@@ -34,6 +34,9 @@ Wokwi : [Link ke prototype Wokwi](https://wokwi.com/projects/465871190871984129)
 ## V2
 ![Rangkaian Sistem V2](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/Feeder%20v2.png)
 
+## V3
+![Rangkaian Sistem V3](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/68f8169ba49ff9cca6584c0edba69a1ffcad6e32/assets/Prototype%20Projek%20Pet%20Feeder%20Drinker%20iterasi%202.PNG)
+
 ## Deskripsi Project
 
 IoT Pet Feeder & Drinker adalah ide project yang bertujuan untuk membantu pemilik hewan peliharaan dalam memberikan makanan dan minuman secara lebih teratur, praktis, dan efisien.
