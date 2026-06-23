@@ -3,7 +3,7 @@
 
 Project ini adalah perencanaan awal untuk membuat sistem pemberi makan dan minum hewan peliharaan secara otomatis berbasis IoT. Pada tahap ini, project masih berfokus pada konsep, tujuan, latar belakang, dan arah pengembangan sistem.
 
-Project ini belum menentukan komponen hardware, platform aplikasi, maupun teknologi backend yang akan digunakan. Dokumentasi ini dibuat sebagai dasar awal sebelum masuk ke tahap desain teknis dan implementasi.
+Project ini dalam pengembangan. Komponen hardware, serta kebutuhan-kebutuhan untuk project ini telah ditentukan.
 
 ---
 
@@ -16,7 +16,14 @@ Project ini belum menentukan komponen hardware, platform aplikasi, maupun teknol
 
 ## Status Project
 
-Planning / Perencanaan Konsep
+Dalam Pengembangan
+
+--
+
+## Link Penting
+
+Kode ESP32: [Link ke branch ESP32](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/tree/esp32)
+Wokwi : [Link ke prototype Wokwi](https://wokwi.com/projects/465871190871984129)
 
 ---
 
