@@ -86,3 +86,19 @@ Manfaat yang diharapkan dari project ini adalah:
 3. Menjadi latihan penerapan konsep IoT dalam kehidupan sehari-hari.
 4. Menjadi dasar pembelajaran tentang otomatisasi sederhana.
 5. Menjadi pondasi untuk pengembangan sistem berbasis mikrokontroller, aplikasi, dan database.
+
+---
+
+## Dokumentasi Foto
+## Proses Wiring
+![Proses Wiring Alat](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/Proses.jpeg)
+
+---
+
+## Final Wiring
+![Final Wiring Alat](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/Finalwiring.jpeg)
+
+---
+
+## Final Wiring
+![Final Wiring Alat](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/Finalwiring2.jpeg)
