@@ -16,7 +16,7 @@ Project ini dalam pengembangan. Komponen hardware, serta kebutuhan-kebutuhan unt
 
 ## Status Project
 
-Dalam Pengembangan
+Final
 
 ---
 
