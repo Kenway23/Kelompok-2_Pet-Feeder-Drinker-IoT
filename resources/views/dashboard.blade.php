@@ -5,178 +5,213 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Pet Feeder Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style> body { font-family: 'Plus Jakarta Sans', sans-serif; } </style>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .paw-bg {
+            background-image:
+                radial-gradient(circle at 12px 12px, rgba(20, 184, 166, .10) 0 3px, transparent 4px),
+                radial-gradient(circle at 28px 16px, rgba(245, 158, 11, .12) 0 2px, transparent 3px),
+                radial-gradient(circle at 20px 30px, rgba(14, 165, 233, .10) 0 3px, transparent 4px);
+            background-size: 64px 64px;
+        }
+        .pet-blob {
+            background:
+                radial-gradient(circle at 50% 26%, #fff7ed 0 15%, transparent 16%),
+                radial-gradient(circle at 36% 42%, #fed7aa 0 8%, transparent 9%),
+                radial-gradient(circle at 64% 42%, #fed7aa 0 8%, transparent 9%),
+                linear-gradient(135deg, #14b8a6, #0ea5e9);
+        }
+    </style>
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col md:flex-row pb-20 md:pb-0">
-
-    <aside class="w-full md:w-64 bg-[#0B0F19] text-white flex flex-row md:flex-col justify-between md:justify-start p-4 md:p-6 md:min-h-screen shrink-0 z-50 shadow-md">
-        <div class="flex items-center space-x-3 md:mb-10">
-            <span class="text-2xl">🐾</span>
-            <span class="font-bold text-lg tracking-wide">Smart Pet Feeder</span>
-        </div>
-        <nav class="hidden md:flex flex-col space-y-2 w-full">
-            <a href="{{ route('dashboard') }}" class="flex items-center space-x-3 bg-blue-600 px-4 py-3 rounded-xl font-medium text-white shadow-sm">
-                <span>🏠</span> <span>Dashboard</span>
-            </a>
-            <a href="{{ route('jadwal.index') }}" class="flex items-center space-x-3 hover:bg-gray-800 px-4 py-3 rounded-xl font-medium text-gray-400 transition">
-                <span>📅</span> <span>Jadwal Pakan</span>
-            </a>
-        </nav>
-        <div class="flex items-center space-x-2 bg-green-950/50 border border-green-800 px-3 py-1 rounded-full text-xs text-green-400">
-            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-            <span>Online</span>
-        </div>
-    </aside>
-
-    <div class="flex-1 flex flex-col min-w-0">
-        <header class="bg-white border-b border-gray-100 px-6 py-6 flex justify-between items-center">
-            <div>
-                <h1 class="text-2xl font-bold text-gray-900">Dashboard</h1>
-                <p class="text-sm text-gray-500">Monitoring & kontrol alat pakan hewan otomatis</p>
-            </div>
-        </header>
-
-        @if(session('success'))
-        <div class="mx-6 mt-4 p-4 bg-green-100 border border-green-200 text-green-800 rounded-xl text-sm font-medium">
-            ✅ {{ session('success') }}
-        </div>
-        @endif
-
-        <main class="flex-1 p-6 space-y-6 max-w-7xl w-full mx-auto">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                <div class="bg-green-50/60 border border-green-100 p-5 rounded-2xl flex items-center justify-between">
+<body class="min-h-screen bg-[#f7fbf7] text-slate-900 paw-bg">
+    <div class="min-h-screen lg:grid lg:grid-cols-[280px_1fr]">
+        <aside class="bg-slate-950 text-white lg:min-h-screen lg:sticky lg:top-0">
+            <div class="flex items-center justify-between gap-4 px-5 py-4 lg:block lg:p-6">
+                <div class="flex items-center gap-3">
+                    <div class="grid h-11 w-11 place-items-center rounded-2xl bg-teal-400 text-slate-950 font-black">PF</div>
                     <div>
-                        <span class="text-xs font-semibold text-gray-400 block mb-1">Status Perangkat</span>
-                        <span class="text-xl font-bold text-green-700">Online</span>
+                        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-teal-200">Pet care</p>
+                        <h1 class="text-lg font-extrabold tracking-tight">Smart Feeder</h1>
                     </div>
-                    <span class="text-3xl">📶</span>
                 </div>
-                <div class="bg-blue-50/60 border border-blue-100 p-5 rounded-2xl flex items-center justify-between">
-                    <div>
-                        <span class="text-xs font-semibold text-gray-400 block mb-1">Waktu Server</span>
-                        <span class="text-xl font-bold text-blue-700" id="live-clock">--:--:--</span>
-                    </div>
-                    <span class="text-3xl">⏰</span>
-                </div>
-                <div class="bg-amber-50/60 border border-amber-100 p-5 rounded-2xl flex items-center justify-between sm:col-span-2 lg:col-span-1">
-                    <div>
-                        <span class="text-xs font-semibold text-gray-400 block mb-1">Pakan Terakhir</span>
-                        <span class="text-xl font-bold text-amber-700">Selesai</span>
-                    </div>
-                    <span class="text-3xl">🍖</span>
+                <div class="flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1.5 text-xs font-bold text-emerald-200">
+                    <span class="h-2 w-2 rounded-full bg-emerald-300"></span>
+                    Online
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-                
-                <div class="space-y-6">
-                    <section class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm text-center">
-    <h2 class="text-sm font-bold text-gray-800 mb-3 text-left">Kontrol Manual</h2>
-    <div class="bg-gray-50 border border-gray-100 p-4 rounded-xl space-y-3">
-        <span class="text-4xl block">🥣</span>
-        <p class="text-xs text-gray-500">Buka katup penampung pakan secara instan sekarang.</p>
-        
-        <form action="{{ route('feed.now') }}" method="POST" class="space-y-4">
-            @csrf
-            
-            <div class="flex items-center justify-center space-x-2">
-                <div class="relative max-w-[100px]">
-                    <input 
-                        type="number" 
-                        name="porsi_manual" 
-                        min="10" 
-                        value="20" 
-                        class="w-full text-center pl-2 pr-2 py-2 bg-white border border-gray-200 rounded-xl text-sm font-bold text-gray-700 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-                        required
-                    >
-                </div>
-                <span class="text-sm font-semibold text-gray-500 select-none">gram</span>
-            </div>
-            
-            <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold text-sm py-2.5 rounded-xl transition cursor-pointer shadow-sm">
-                Keluarkan Pakan
-            </button>
-        </form>
-    </div>
-</section>
+            <nav class="hidden px-4 pb-6 lg:block">
+                <a href="{{ route('dashboard') }}" class="mb-2 flex items-center justify-between rounded-2xl bg-white px-4 py-3 font-bold text-slate-950 shadow-lg shadow-teal-950/20">
+                    <span>Dashboard</span>
+                    <span class="text-teal-600">01</span>
+                </a>
+                <a href="{{ route('jadwal.index') }}" class="flex items-center justify-between rounded-2xl px-4 py-3 font-semibold text-slate-300 transition hover:bg-white/10 hover:text-white">
+                    <span>Jadwal Pakan</span>
+                    <span>02</span>
+                </a>
+            </nav>
+        </aside>
 
+        <div class="min-w-0">
+            <header class="mx-auto flex w-full max-w-7xl flex-col gap-5 px-5 py-6 sm:px-8 lg:flex-row lg:items-end lg:justify-between lg:py-8">
+                <div>
+                    <p class="text-sm font-bold uppercase tracking-[0.22em] text-teal-700">Dashboard alat</p>
+                    <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">Kontrol pakan peliharaan</h2>
+                    <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600">Pantau koneksi, cek jadwal aktif, dan kirim perintah feeding langsung dari website.</p>
                 </div>
+                <div class="rounded-2xl border border-white bg-white/80 px-4 py-3 shadow-sm">
+                    <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Waktu server</p>
+                    <p class="mt-1 text-2xl font-extrabold text-sky-700" id="live-clock">--:--:--</p>
+                </div>
+            </header>
 
-                <div class="lg:col-span-2 bg-white border border-gray-100 rounded-2xl p-5 shadow-sm overflow-hidden">
-                    <h2 class="text-sm font-bold text-gray-800 mb-4">Daftar Jadwal Pakan Aktif</h2>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse text-sm">
-                            <thead>
-                                <tr class="border-b border-gray-100 text-xs text-gray-400 font-bold">
-                                    <th class="pb-2">No</th>
-                                    <th class="pb-2">Waktu</th>
-                                    <th class="pb-2">Takaran</th>
-                                    <th class="pb-2 text-center">Status</th>
-                                    <th class="pb-2 text-right">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-50 font-medium text-gray-700">
-                            @forelse($schedules as $index => $sch)
-                            <tr class="{{ !$sch->is_active ? 'opacity-60 bg-gray-50/50' : '' }}">
-                            <td class="py-3.5 text-gray-400">{{ $index + 1 }}.</td>
-                            <td class="py-3.5 font-bold text-gray-900">⏰ {{ \Carbon\Carbon::parse($sch->waktu_makan)->format('H:i') }} WIB</td>
-                            <td class="py-3.5"><span class="bg-amber-50 text-amber-700 text-xs px-2.5 py-1 rounded-md">🍖 {{ $sch->porsi }} gram</span></td>
-        
-                            <td class="py-3.5 text-center">
-                            @if($sch->is_active)
-                                <span class="text-[11px] bg-green-50 text-green-700 px-2.5 py-0.5 rounded-full border border-green-100 font-semibold">Aktif</span>
-                            @else
-                                <span class="text-[11px] bg-gray-100 text-gray-500 px-2.5 py-0.5 rounded-full border border-gray-200 font-semibold">Nonaktif</span>
-                            @endif
-                            </td>
-        
-                            <td class="py-3.5 text-right">
-                            <form action="{{ route('schedule.destroy', $sch->id) }}" method="POST" onsubmit="return confirm('Hapus jadwal?')">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="text-gray-400 hover:text-red-500 p-1 rounded-lg hover:bg-red-50 cursor-pointer">🗑️</button>
+            @if(session('success'))
+                <div class="mx-auto mb-4 max-w-7xl px-5 sm:px-8">
+                    <div class="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800 shadow-sm">
+                        {{ session('success') }}
+                    </div>
+                </div>
+            @endif
+
+            @if(session('error') || $errors->any())
+                <div class="mx-auto mb-4 max-w-7xl px-5 sm:px-8">
+                    <div class="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-800 shadow-sm">
+                        @if(session('error'))
+                            {{ session('error') }}
+                        @else
+                            {{ $errors->first() }}
+                        @endif
+                    </div>
+                </div>
+            @endif
+
+            <main class="mx-auto grid w-full max-w-7xl gap-6 px-5 pb-24 sm:px-8 lg:grid-cols-3 lg:pb-10">
+                <section class="lg:col-span-2">
+                    <div class="grid gap-4 sm:grid-cols-3">
+                        <div class="rounded-3xl border border-white bg-white/90 p-5 shadow-sm">
+                            <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Perangkat</p>
+                            <p class="mt-3 text-2xl font-extrabold text-emerald-700">Online</p>
+                            <p class="mt-2 text-sm text-slate-500">ESP32 siap menerima command.</p>
+                        </div>
+                        <div class="rounded-3xl border border-white bg-white/90 p-5 shadow-sm">
+                            <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Jadwal aktif</p>
+                            <p class="mt-3 text-2xl font-extrabold text-sky-700">{{ $schedules->where('is_active', true)->count() }}</p>
+                            <p class="mt-2 text-sm text-slate-500">Jadwal sedang aktif.</p>
+                        </div>
+                        <div class="rounded-3xl border border-white bg-white/90 p-5 shadow-sm">
+                            <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Status pakan</p>
+                            <p class="mt-3 text-2xl font-extrabold text-amber-600">Ready</p>
+                            <p class="mt-2 text-sm text-slate-500">Siap untuk demo feeding.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 overflow-hidden rounded-3xl border border-white bg-white/95 shadow-sm">
+                        <div class="flex flex-col gap-3 border-b border-slate-100 px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
+                            <div>
+                                <h3 class="text-lg font-extrabold text-slate-950">Jadwal pakan aktif</h3>
+                                <p class="mt-1 text-sm text-slate-500">Ringkasan jadwal yang akan dikirim dan disinkronkan ke alat.</p>
+                            </div>
+                            <a href="{{ route('jadwal.index') }}" class="inline-flex items-center justify-center rounded-2xl bg-slate-950 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-teal-700">Atur Jadwal</a>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full min-w-[640px] text-left text-sm">
+                                <thead>
+                                    <tr class="bg-slate-50 text-xs font-extrabold uppercase tracking-wider text-slate-400">
+                                        <th class="px-5 py-3">No</th>
+                                        <th class="px-5 py-3">Waktu</th>
+                                        <th class="px-5 py-3">Porsi</th>
+                                        <th class="px-5 py-3 text-center">Status</th>
+                                        <th class="px-5 py-3 text-right">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100">
+                                    @forelse($schedules as $index => $sch)
+                                        <tr class="{{ !$sch->is_active ? 'bg-slate-50/70 text-slate-400' : 'text-slate-700' }}">
+                                            <td class="px-5 py-4 font-bold">{{ $index + 1 }}</td>
+                                            <td class="px-5 py-4">
+                                                <span class="text-base font-extrabold text-slate-950">{{ \Carbon\Carbon::parse($sch->waktu_makan)->format('H:i') }}</span>
+                                                <span class="ml-1 text-xs font-bold text-slate-400">WIB</span>
+                                            </td>
+                                            <td class="px-5 py-4">
+                                                <span class="rounded-full bg-amber-100 px-3 py-1 text-xs font-extrabold text-amber-800">{{ $sch->porsi }} gram</span>
+                                            </td>
+                                            <td class="px-5 py-4 text-center">
+                                                @if($sch->is_active)
+                                                    <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-extrabold text-emerald-700">Aktif</span>
+                                                @else
+                                                    <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-extrabold text-slate-500">Nonaktif</span>
+                                                @endif
+                                            </td>
+                                            <td class="px-5 py-4 text-right">
+                                                <form action="{{ route('schedule.destroy', $sch->id) }}" method="POST" onsubmit="return confirm('Hapus jadwal?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="rounded-xl border border-red-100 px-3 py-2 text-xs font-bold text-red-600 transition hover:bg-red-50">Hapus</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="5" class="px-5 py-12 text-center text-slate-400">Belum ada jadwal makan otomatis.</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <aside class="space-y-6">
+                    <section class="overflow-hidden rounded-3xl bg-slate-950 text-white shadow-xl shadow-slate-200">
+                        <div class="pet-blob h-36"></div>
+                        <div class="p-6">
+                            <p class="text-xs font-bold uppercase tracking-[0.22em] text-teal-200">Kontrol manual</p>
+                            <h3 class="mt-2 text-2xl font-extrabold">Keluarkan pakan sekarang</h3>
+                            <p class="mt-2 text-sm leading-6 text-slate-300">Perintah dikirim melalui MQTT dan hanya dijalankan ESP32 jika token cocok.</p>
+
+                            <form action="{{ route('feed.now') }}" method="POST" class="mt-5 space-y-4">
+                                @csrf
+                                <label class="block">
+                                    <span class="mb-2 block text-xs font-bold uppercase tracking-widest text-slate-400">Porsi</span>
+                                    <div class="flex items-center rounded-2xl bg-white p-2">
+                                        <input type="number" name="porsi_manual" min="10" placeholder="ex. 10" required class="w-full rounded-xl border-0 bg-transparent px-3 py-2 text-center text-lg font-extrabold text-slate-950 outline-none placeholder:text-slate-300">
+                                        <span class="pr-3 text-sm font-bold text-slate-400">gram</span>
+                                    </div>
+                                </label>
+                                <button type="submit" class="w-full rounded-2xl bg-teal-400 px-5 py-3.5 text-sm font-extrabold text-slate-950 shadow-lg shadow-teal-950/30 transition hover:bg-teal-300">Keluarkan Pakan</button>
                             </form>
-                            </td>
-                            </tr>
-                            @empty
-                            <tr>
-                            <td colspan="5" class="py-8 text-center text-gray-400 font-normal">Belum ada pengaturan jadwal makan otomatis.</td>
-                            </tr>
-                            @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                        </div>
+                    </section>
 
-            </div>
-        </main>
+                    <section class="rounded-3xl border border-white bg-white/90 p-5 shadow-sm">
+                        <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Alur demo</p>
+                        <div class="mt-4 space-y-3 text-sm text-slate-600">
+                            <div class="flex gap-3"><span class="font-extrabold text-teal-700">1</span><span>Website publish command ke broker MQTT.</span></div>
+                            <div class="flex gap-3"><span class="font-extrabold text-teal-700">2</span><span>ESP32 validasi device id dan token.</span></div>
+                            <div class="flex gap-3"><span class="font-extrabold text-teal-700">3</span><span>Servo bergerak jika command diterima.</span></div>
+                        </div>
+                    </section>
+                </aside>
+            </main>
+        </div>
     </div>
 
-    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-[#0B0F19] border-t border-gray-800 flex justify-around p-3 z-50">
-        <a href="{{ route('dashboard') }}" class="flex flex-col items-center text-blue-500">
-            <span>🏠</span><span class="text-[10px]">Dashboard</span>
-        </a>
-        <a href="{{ route('jadwal.index') }}" class="flex flex-col items-center text-gray-400">
-            <span>📅</span><span class="text-[10px]">Jadwal</span>
-        </a>
-    </div>
+    <nav class="fixed inset-x-0 bottom-0 z-50 grid grid-cols-2 border-t border-slate-200 bg-white/95 p-2 shadow-2xl lg:hidden">
+        <a href="{{ route('dashboard') }}" class="rounded-2xl bg-slate-950 py-3 text-center text-xs font-extrabold text-white">Dashboard</a>
+        <a href="{{ route('jadwal.index') }}" class="rounded-2xl py-3 text-center text-xs font-extrabold text-slate-500">Jadwal</a>
+    </nav>
 
     <script>
-       
-        setInterval(() => {
+        function updateClock() {
             const now = new Date();
-            document.getElementById('live-clock').innerText = now.toTimeString().split(' ')[0];
-        }, 1000);
+            const clock = document.getElementById('live-clock');
+            if (clock) clock.innerText = now.toTimeString().split(' ')[0];
+        }
 
-        
-        flatpickr(".timepicker", {
-            enableTime: true,
-            noCalendar: true,
-            dateFormat: "H:i",
-            time_24hr: true
-        });
+        updateClock();
+        setInterval(updateClock, 1000);
     </script>
 </body>
 </html>
