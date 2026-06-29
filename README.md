@@ -100,6 +100,11 @@ Manfaat yang diharapkan dari project ini adalah:
 8. Kabel Jumper
 
 ## Dokumentasi Foto
+## Screenshot Website
+![Proses Wiring Alat](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/tampila_web_1.jpeg)
+
+![Proses Wiring Alat](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/tampila_web_2.jpeg)
+
 ## Proses Wiring
 ![Proses Wiring Alat](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/proses.jpeg)
 
@@ -112,6 +117,8 @@ Manfaat yang diharapkan dari project ini adalah:
 
 ## Final Wiring
 ![Final Wiring Alat](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/Finalwiring2.jpeg)
+
+---
 
 ## Demo Project
 ![Demo 1](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/Demo_Project_iot.gif)
