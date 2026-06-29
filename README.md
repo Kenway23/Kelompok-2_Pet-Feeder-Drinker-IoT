@@ -101,12 +101,10 @@ Manfaat yang diharapkan dari project ini adalah:
 
 ## Dokumentasi Foto
 ## Screenshot Website
-![Proses Wiring Alat](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/tampila_web_1.png)
-
-![Proses Wiring Alat](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/tampila_web_2.png)
+| <img src="assets/tampila_web_1.png" width="500"> | <img src="assets/tampila_web_2.png" width="500">
 
 ## Proses Wiring
-![Proses Wiring Alat](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/proses.jpeg)
+<img src="assets/proses.jpeg" width="350">
 
 ---
 
@@ -116,7 +114,5 @@ Manfaat yang diharapkan dari project ini adalah:
 ---
 
 ## Demo Project
-![Demo 1](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/Demo_Project_iot.gif)
-
-![Demo 2](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/Demo_Project_iot_2.gif)
+| <img src="assets/Demo_Project_iot.gif" width="350"> | <img src="assets/Demo_Project_iot_2.gif" width="350">
 
