@@ -89,6 +89,15 @@ Manfaat yang diharapkan dari project ini adalah:
 
 ---
 
+## Komponen yang digunakan
+1. ESP32 : Otak dari alat
+2. LCD 12IC: Untuk menampilkan indikator
+3. Servo: Gerbang untuk mengeluarkan pakan
+4. Buzzer: Untuk memberikan sinyal suara
+5. Sensor ultrasonik: Untuk mendeteksi pakan jika sudah habis
+6. Button: Untuk mengeluarkan pakan secara manual / menjalankan alat secara manual
+7. Breadboard: Untuk merapikan perkabelan dan memperbanyak jalur
+
 ## Dokumentasi Foto
 ## Proses Wiring
 ![Proses Wiring Alat](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/proses.jpeg)
