@@ -114,7 +114,7 @@ Manfaat yang diharapkan dari project ini adalah:
 ![Final Wiring Alat](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/Finalwiring2.jpeg)
 
 ## Demo Project
-![Demo 1](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/Demo Projecr iot.mp4)
+![Demo 1](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/Demo_Project_iot.mp4)
 
-![Demo 2](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/Demo_Projecr_iot.mp4)
+![Demo 2](https://github.com/Kenway23/Kelompok-2_Pet-Feeder-Drinker-IoT/blob/master/assets/Demo_Project_iot_2.mp4)
 
