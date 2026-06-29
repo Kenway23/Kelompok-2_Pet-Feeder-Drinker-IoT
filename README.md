@@ -97,6 +97,7 @@ Manfaat yang diharapkan dari project ini adalah:
 5. Sensor ultrasonik: Untuk mendeteksi pakan jika sudah habis
 6. Button: Untuk mengeluarkan pakan secara manual / menjalankan alat secara manual
 7. Breadboard: Untuk merapikan perkabelan dan memperbanyak jalur
+8. Kabel Jumper
 
 ## Dokumentasi Foto
 ## Proses Wiring
